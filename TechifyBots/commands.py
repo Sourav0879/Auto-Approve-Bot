@@ -1,6 +1,5 @@
 import random
 from pyrogram import Client, filters, enums
-from pyrogram.errors import *
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 import asyncio
 from Script import text
