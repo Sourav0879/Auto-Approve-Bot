@@ -1,9 +1,10 @@
-import traceback
 from pyrogram import Client, filters
-from asyncio.exceptions import TimeoutError
-from pyrogram.types import *
-from pyrogram.errors import ApiIdInvalid, PhoneNumberInvalid, PhoneCodeInvalid, PhoneCodeExpired, SessionPasswordNeeded, PasswordHashInvalid
-from config import *
+from pyrogram.types import Message
+from pyrogram.errors import (
+    PhoneNumberInvalid, PhoneCodeInvalid, PhoneCodeExpired,
+    SessionPasswordNeeded, PasswordHashInvalid,
+)
+from config import API_ID, API_HASH
 from .database import tb
 
 SESSION_STRING_SIZE = 351
