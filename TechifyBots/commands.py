@@ -89,15 +89,15 @@ async def approve_new(client, m):
             IMAGE_URL = "https://i.ibb.co/5Dsr2Ln/photo-2026-08-11-08-09-54-7672683483432484900.jpg" 
             
             # Photo 1 er moto stylish text caption
-            caption_text = f"""
-✦ ʜᴇʟʟᴏ {m.from_user.mention} ✦
+            caption_text = f"""<blockquote>
+✦ ʜᴇʟʟᴏ {m.from_user.mention}  ››
 
-✦ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ {m.chat.title} - ᴡᴀᴛᴄʜ sᴇʀɪᴇs ✦
+✦ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ - {m.chat.title}  ››
 
-✦ ʏᴏᴜʀ ᴊᴏɪɴ ʀᴇǫᴜᴇsᴛ ʜᴀs ʙᴇᴇɴ ᴀᴄᴄᴇᴘᴛᴇᴅ ✦
+✦ ʏᴏᴜʀ ᴊᴏɪɴ ʀᴇǫᴜᴇsᴛ ʜᴀs ʙᴇᴇɴ ᴀᴄᴄᴇᴘᴛᴇᴅ  ››
 
 • ᴘᴏᴡᴇʀᴇᴅ ʙʏ ✦ @LuxeFlix
-"""
+</blockquote>"""
             
             # Nicher button gulo
             buttons = InlineKeyboardMarkup(
