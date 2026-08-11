@@ -88,10 +88,10 @@ async def approve_new(client, m):
             # Apnar pochondo moto chobir URL (Photo 1 er moto) ekhane din
             IMAGE_URL = "https://i.ibb.co/5Dsr2Ln/photo-2026-08-11-08-09-54-7672683483432484900.jpg" 
             
-            # Photo 1 er moto stylish text caption
+            # Photo 1 er moto stylish text caption (Space fix kora hoyeche)
             caption_text = f"""<b>HEYY THERE {m.from_user.mention} YOUR JOIN REQUEST
-            HAS BEEN ACCEPTED
-            FOR {m.chat.title}</b>"""
+HAS BEEN ACCEPTED
+FOR {m.chat.title}</b>"""
             
             # Nicher button gulo
             buttons = InlineKeyboardMarkup(
@@ -101,11 +101,12 @@ async def approve_new(client, m):
                 ]
             )
             
-            # send_message er bodole send_photo use kora holo
+            # send_message er bodole send_photo use kora holo, parse_mode add kora hoyeche
             await client.send_photo(
                 chat_id=m.from_user.id,
                 photo=IMAGE_URL,
                 caption=caption_text,
+                parse_mode=enums.ParseMode.HTML,
                 reply_markup=buttons
             )
         except Exception as e:
