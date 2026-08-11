@@ -81,14 +81,43 @@ async def approve_new(client, m):
     if not NEW_REQ_MODE:
         return
     try:
+        # Request approve korar command
         await client.approve_chat_join_request(m.chat.id, m.from_user.id)
+        
         try:
-            await client.send_message(
-                m.from_user.id,
-                f"{m.from_user.mention},\n\n𝖸𝗈𝗎𝗋 𝖱𝖾𝗊𝗎𝗌𝗍 𝖳𝗈 𝖩𝗈𝗂𝗇 {m.chat.title} 𝖧𝖺𝗌 𝖡𝖾𝖾𝗇 𝖠𝖼𝖼𝖾𝗉𝗍𝖾𝖽."
+            # Apnar pochondo moto chobir URL (Photo 1 er moto) ekhane din
+            IMAGE_URL = "https://i.ibb.co/5Dsr2Ln/photo-2026-08-11-08-09-54-7672683483432484900.jpg" 
+            
+            # Photo 1 er moto stylish text caption
+            caption_text = f"""
+✦ ʜᴇʟʟᴏ {m.from_user.mention} ✦
+
+✦ ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ {m.chat.title} - ᴡᴀᴛᴄʜ sᴇʀɪᴇs ✦
+
+✦ ʏᴏᴜʀ ᴊᴏɪɴ ʀᴇǫᴜᴇsᴛ ʜᴀs ʙᴇᴇɴ ᴀᴄᴄᴇᴘᴛᴇᴅ ✦
+
+• ᴘᴏᴡᴇʀᴇᴅ ʙʏ ✦ @LuxeFlix
+"""
+            
+            # Nicher button gulo
+            buttons = InlineKeyboardMarkup(
+                [
+                    [InlineKeyboardButton("• JOIN CHAT •", url="https://t.me/koreandrama006")],
+                    [InlineKeyboardButton("• UPDATES •", url="https://t.me/moviefileshd1")]
+                ]
             )
-        except:
+            
+            # send_message er bodole send_photo use kora holo
+            await client.send_photo(
+                chat_id=m.from_user.id,
+                photo=IMAGE_URL,
+                caption=caption_text,
+                reply_markup=buttons
+            )
+        except Exception as e:
+            # User jodi bot ke block kore rakhe tahole error asbe, tai eta pass kora holo
             pass
+            
     except Exception as e:
         print(str(e))
         pass
