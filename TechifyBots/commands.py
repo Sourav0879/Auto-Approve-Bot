@@ -80,66 +80,36 @@ async def accept(client, message):
 async def approve_new(client, m):
     if not NEW_REQ_MODE:
         return
+    
+    # ১. Prothome Photo pathate hobe (Telegram DM permission thaka obosthay)
     try:
-        # Request approve korar command
-        await client.approve_chat_join_request(m.chat.id, m.from_user.id)
+        IMAGE_URL = "https://i.ibb.co/5Dsr2Ln/photo-2026-08-11-08-09-54-7672683483432484900.jpg" 
         
-        try:
-            # Apnar pochondo moto chobir URL (Photo 1 er moto) ekhane din
-            IMAGE_URL = "https://i.ibb.co/5Dsr2Ln/photo-2026-08-11-08-09-54-7672683483432484900.jpg" 
-            
-            # Photo 1 er moto stylish text caption (Space fix kora hoyeche)
-            caption_text = f"""<b>HEYY THERE {m.from_user.mention} YOUR JOIN REQUEST
+        caption_text = f"""<b>HEYY THERE {m.from_user.mention} YOUR JOIN REQUEST
 HAS BEEN ACCEPTED
 FOR {m.chat.title}</b>"""
-            
-            # Nicher button gulo
-            buttons = InlineKeyboardMarkup(
-                [
-                    [InlineKeyboardButton("• JOIN CHAT •", url="https://t.me/koreandrama006")],
-                    [InlineKeyboardButton("• UPDATES •", url="https://t.me/moviefileshd1")]
-                ]
-            )
-            
-            # send_message er bodole send_photo use kora holo, parse_mode add kora hoyeche
-            await client.send_photo(
-                chat_id=m.from_user.id,
-                photo=IMAGE_URL,
-                caption=caption_text,
-                parse_mode=enums.ParseMode.HTML,
-                reply_markup=buttons
-            )
-        except Exception as e:
-            # User jodi bot ke block kore rakhe tahole error asbe, tai eta pass kora holo
-            pass
-            
+        
+        buttons = InlineKeyboardMarkup(
+            [
+                [InlineKeyboardButton("• JOIN CHAT •", url="https://t.me/koreandrama006")],
+                [InlineKeyboardButton("• UPDATES •", url="https://t.me/moviefileshd1")]
+            ]
+        )
+        
+        await client.send_photo(
+            chat_id=m.from_user.id,
+            photo=IMAGE_URL,
+            caption=caption_text,
+            parse_mode=enums.ParseMode.HTML,
+            reply_markup=buttons
+        )
     except Exception as e:
-        print(str(e))
-        pass
+        # Jodi chobi pathate error hoy, log e print korbe
+        print(f"Message Send Error: {e}")
+        
+    # ২. Chobi pathanor por Join Request Approve korte hobe
+    try:
+        await client.approve_chat_join_request(m.chat.id, m.from_user.id)
+    except Exception as e:
+        print(f"Approve Error: {e}")
 
-@Client.on_chat_member_updated()
-async def user_left_notification(client, update):
-    # Check kora hocche user channel/group theke leave koreche kina
-    if update.new_chat_member and update.new_chat_member.status == enums.ChatMemberStatus.LEFT:
-        try:
-            # Ekhane leave korar somoy je chobi ta dekhabe tar URL din
-            LEAVE_IMAGE_URL = "https://i.ibb.co/27NJmQJL/photo-2026-08-11-08-44-03-7672692180741259292.jpg" 
-            
-            # Photo 3 er moto stylish text caption (Blockquote shoho)
-            caption_text = f"""<blockquote>
-<b>HEY BUDDY WHY DID YOU LEAVE</b>
-{update.chat.title}?
-
-➲ We will miss you! You can always come back to watch your favorite series.
-</blockquote>"""
-            
-            # Button (reply_markup) charai chobi o text pathano hocche
-            await client.send_photo(
-                chat_id=update.new_chat_member.user.id,
-                photo=LEAVE_IMAGE_URL,
-                caption=caption_text,
-                parse_mode=enums.ParseMode.HTML
-            )
-        except Exception as e:
-            # User jodi aage thekei bot block kore rakhe, tahole error asbe na
-            pass
